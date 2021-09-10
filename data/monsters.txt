@@ -1,0 +1,52 @@
+# This file contains a series of templates that represent the monsters
+
+# NOTE: you can add "comment" lines anywhere in this file to explain further if needed.
+# To do this, the line must BEGIN with "# " (yes, with a space)
+
+# Templates MUST begin with a "name" line. By convention, templates are also divided up by
+# blank lines, but this is not strictly necessary
+
+# Do NOT modify this file if you do not understand how any part of it works. This can and will
+# result in crashes or undefined behavior
+
+# ------------------------------------------------------------------------------------------ #
+# -                                 HOW TO MAKE A TEMPLATE                                 - #
+# ------------------------------------------------------------------------------------------ #
+# - name: this is the name of the monster (this DOES NEED to be unique)                    - #
+# - etype: what prototype and texture this enemy should use                                - #
+# - texture: the texture that this enemy should use                                        - #
+# - health: the health range that this monster can have                                    - #
+# - ac: the AC range that this monster can have                                            - #
+# ------------------------------------------------------------------------------------------ #
+# -                                                                                        - #
+# ------------------------------------------------------------------------------------------ #
+
+name: Kobold
+etype: e_KOBOLD
+health: 10-20
+ac: 10-12
+
+name: Goblin
+etype: e_GOBLIN
+health: 10-20
+ac: 8-10
+
+name: Hobgoblin
+etype: e_HOBGOBLIN
+health: 30-45
+ac: 12-14
+
+name: Orc
+etype: e_ORC_BASIC
+health: 25-35
+ac: 10-12
+
+name: Orc Warrior
+etype: e_ORC_WARRIOR
+health: 30-35
+ac: 14-15
+
+name: Orc Warlord
+etype: e_ORC_WARLORD
+health: 35-40
+ac: 16-16

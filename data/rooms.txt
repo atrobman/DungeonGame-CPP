@@ -1,0 +1,719 @@
+# This file contains a series of templates that represent the rooms in Dungeon Game
+
+# NOTE: you can add "comment" lines anywhere in this file to explain further if needed.
+# To do this, the line must BEGIN with "# " (yes, with a space)
+
+# Templates MUST begin with a "name" line. By convention, templates are also divided up by
+# blank lines, but this is not strictly necessary
+
+# TODO: Add information about where Theme info can be found
+#       For now, the valid themes are DUNGON, CRYPT, and STRONGHOLD
+
+# TODO: Add a way for users to add custom tiles to a template
+
+# ------------------------------------------------------------------------------------------ #
+# -                                 HOW TO MAKE A TEMPLATE                                 - #
+# ------------------------------------------------------------------------------------------ #
+# - name: this is the name of the room (this does not need to be unique)                   - #
+# - weight: how heavily weighted this room is on dungeon gen. Normal weight is 1, Higher   - #
+# -         means a higher weight (more likely to generate)                                - #
+# - size: the size of the room template. this should be in the format rows-columns         - #
+# - doors: the number of door configurations in this room                                  - #
+# - tval: the type of item to spawn on $ tiles                                             - #
+# - theme: flags to denote what themes this room is valid for, seperated by -              - #
+# -                                                                                        - #
+# - these lines are followed by a series of lines prefixed by D:. these lines are the      - #
+# - template for the room. a dictionary of symbols is used to define each template.        - #
+# - invalid symbols will always generate as a wall                                         - #
+# -                                                                                        - #
+# -    ^     - empty space                                                                 - #
+# -    #     - wall                                                                        - #
+# -    %     - connection points for corridors. this is a wall if unused                   - #
+# -    =     - door (this will always generate)                                            - #
+# -    .     - floor                                                                       - #
+# -    [1-9] - doors generated depending on the configuration decided on by the "doors"    - #
+# -            tag. each value is a different configuration, and all doors of a            - #
+# -            configuration will generate if its value is chosen. all non-chosen doors    - #
+# -            will generate as walls instead                                              - #
+# -    x     - optional wall 1. at room generation, a random coin flip is made. if heads,  - #
+# -            then optional tileset 1 generates. if tileset 1 generates, this is a wall,  - #
+# -            otherwise this is a floor tile                                              - #
+# -    +     - optional wall 2. if tileset 2 generates, this is a wall, otherwise          - #
+# -            this is a floor tile                                                        - #
+# -    (     - optional door 1a. if tileset 1 generates, this is a door, otherwise         - #
+# -            this is a wall                                                              - #
+# -    [     - optional door 1b. if tileset 1 generates, this is a door, otherwise         - #
+# -            this is a floor tile                                                        - #
+# -    )     - optional door 2a. if tileset 2 generates, this is a door, otherwise         - #
+# -            this is a wall                                                              - #
+# -    ]     - optional door 2b. if tileset2 generates, this is a door, otherwise          - #
+# -            this is a floor tile                                                        - #
+# -    *     - a stairwell with monsters guarding it                                       - #
+# -    !     - spawn monsters near this point (may have multiple)                          - #
+# -    -     - spawn items near this point (may have multiple)                             - #
+# -    @     - spawn items and monsters near this point (may have multiple)                - #
+# -    $     - a treasure of the type specified by tval                                    - #
+# -                                                                                        - #
+# -                                                                                        - #
+# -                                                                                        - #
+# -                                    EXAMPLE TEMPLATE                                    - #
+# - name: Small Room                                                                       - #
+# - weight: 1                                                                              - #
+# - size: 9-9                                                                              - #
+# - doors: 0                                                                               - #
+# - tval: 0                                                                                - #
+# - theme: DUNGEON-CRYPT-STRONGHOLD                                                        - #
+# - D:#%%%#%%%#                                                                            - #
+# - D:%...]...%                                                                            - #
+# - D:#.!.+...%                                                                            - #
+# - D:%...#...%                                                                            - #
+# - D:#+++#xxx#                                                                            - #
+# - D:%...#...%                                                                            - #
+# - D:%...x.-.%                                                                            - #
+# - D:%...[...%                                                                            - #
+# - D:#%%%#%%%#                                                                            - #
+# ------------------------------------------------------------------------------------------ #
+# -                                                                                        - #
+# ------------------------------------------------------------------------------------------ #
+
+# ## TEMPLATED ROOMS ## #
+
+# Basic Rectangles #
+
+name: Small w/ Central Room
+weight: 1
+size: 7-7
+doors: 4
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%#%#%#
+D:%.].].%
+D:%.#2#.%
+D:%.1@3.%
+D:%.#4#.%
+D:%.].].%
+D:#%#%#%#
+
+name: Large w/ Central Room
+weight: 1
+size: 13-13
+doors: 4
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%#%%%#%%%#
+D:%...+...+...%
+D:%...]...]...%
+D:%...+...+...%
+D:%...##3##...%
+D:%...#...#...%
+D:%...4.*.2...%
+D:%...#...#...%
+D:%...##1##...%
+D:%...x...x...%
+D:%...[.-.[...%
+D:%...x...x...%
+D:#%%%#%%%#%%%#
+
+name: Ladder (linked) (vertical)
+weight: 1
+size: 7-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%#
+D:%.....%
+D:%.###.%
+D:%.(.(.%
+D:%.###.%
+D:%..x..%
+D:%.###.%
+D:%.(.(.%
+D:%.###.%
+D:%.....%
+D:#%%%%%#
+
+name: Ladder (unlinked) (vertical)
+weight: 1
+size: 7-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%#%%#
+D:%..#..%
+D:%.###.%
+D:%.(.(.%
+D:%.###.%
+D:%..x..%
+D:%.###.%
+D:%.(.(.%
+D:%.###.%
+D:%..#..%
+D:#%%#%%#
+
+name: Ladder (linked) (horizontal)
+weight: 1
+size: 11-7
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%#
+D:%.........%
+D:%.#(#.#(#.%
+D:%.#.#x#.#.%
+D:%.#(#.#(#.%
+D:%.........%
+D:#%%%%%%%%%#
+
+name: Ladder (unlinked) (horizontal)
+weight: 1
+size: 11-7
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%#
+D:%.........%
+D:%.#(#.#(#.%
+D:###.#x#.###
+D:%.#(#.#(#.%
+D:%.........%
+D:#%%%%%%%%%#
+
+name: Angband-Gatehouse
+weight: 1
+size: 15-11
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%#%#%%%%%#
+D:%.....[.[.....%
+D:#######.#######
+D:#.....#=#.....#
+D:#...@.=.=.....#
+D:###1###.###1###
+D:#.....=.=.@...#
+D:#.....#=#.....#
+D:#######.#######
+D:%.....[.[.....%
+D:#%%%%%#%#%%%%%#
+
+name: Angband-Sidewinder
+weight: 1
+size: 15-11
+doors: 3
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%#%%%%%%%%%#%#
+D:%.].........].%
+D:###1#####1###.%
+D:#.....#.....3.%
+D:#.....#@....2.%
+D:#3###2#######.%
+D:%.[.........[.%
+D:%.###1###2#1#3#
+D:%.2....@#.....#
+D:%.3.....#.....#
+D:#%#############
+
+name: Angband-Winding Path
+weight: 1
+size: 15-11
+doors: 3
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%#####%%%%%%%#
+D:%.#...#.......%
+D:%.2.@.3.##1##.%
+D:%.#...#.#...#.%
+D:%.##1##.2...3.%
+D:%.#...#[#...#.%
+D:%.3...2.##1##.%
+D:%.#...#.#...#.%
+D:%.##1##.3.@.2.%
+D:%.......#...#.%
+D:#%%%%%%%#####%#
+
+name: Angband-Staggerd Chambers
+weight: 1
+size: 16-11
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%#%%#%%#%%#%%#
+D:%..2..2..2..2..%
+D:%..1..1..1..1..%
+D:#2##..##2#..##2#
+D:%..1..1..1@.1..%
+D:%..####xx####..%
+D:%..1.@1..1..1..%
+D:#2##..#2##..##2#
+D:%..1..1..1..1..%
+D:%..2..2..2..2..%
+D:#%%#%%#%%#%%#%%#
+
+name: Angband-Double Zigzag
+weight: 1
+size: 17-9
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%#####%#%#####%#
+D:%.......#.......%
+D:#.#2###1#1###2#.#
+D:%.#.1.2@1.2.1.#.%
+D:###[#[#[#[#[#[###
+D:%.#.2.1.2.1.2.#.%
+D:#.#1###2#2###1#.#
+D:%.......#.......%
+D:#%#####%#%#####%#
+
+name: Angband-Vertical Rooms
+weight: 1
+size: 17-9
+doors: 3
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%#############%#
+D:%.#..#..#..#..#.%
+D:%.2..3..2..3..2.%
+D:%.#..#[x#x[#..#.%
+D:%.1..1@.1..1..1.%
+D:%.#..#[x#x[#..#.%
+D:%.3..2..3..2..3.%
+D:%.#..#..#..#..#.%
+D:#%#############%#
+
+name: Angband-Box Rooms
+weight: 1
+size: 25-11
+doors: 4
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%%%%%%%%%%%%%%%#
+D:%.......................%
+D:%.##4##2##3###3##2##4##.%
+D:%.#.........#.........#.%
+D:%.#...xxx...#...xxx...#.%
+D:%.1...x@[...#...[@x...1.%
+D:%.#...xxx...#...xxx...#.%
+D:%.#.........#.........#.%
+D:%.##3##2##4###4##2##3##.%
+D:%.......................%
+D:#%%%%%%%%%%%%%%%%%%%%%%%#
+
+name: Angband-Airlocks
+weight: 1
+size: 27-7
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:^^#######^#%%%%%#^#######^^
+D:^^#.....#^#.....#^#.....#^^
+D:#%#..x..###..x..###..x..#%#
+D:%.=..x..=@=..x..=@=..x..=.%
+D:#%#..x..###..x..###..x..#%#
+D:^^#.....#^#.....#^#.....#^^
+D:^^#######^#%%%%%#^#######^^
+
+name: Angband-Giant Checkerboard
+weight: 1
+size: 33-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%#^^^^^^^#%%%%%%%#^^^^^^^^
+D:%x.x.x.x#^^^^^^^#x.x.x.x#^^^^^^^^
+D:%.x.x.x.#^^^^^^^#.x.x.x.#^^^^^^^^
+D:%x.x.x.x#^^^^^^^#x.x.x.x#^^^^^^^^
+D:%.x.x.x.##^^^^^##.x.x.x@##^^^^^^^
+D:########=#######=#######=########
+D:^^^^^^^##@x.x.x.##^^^^^##.x.x.x.%
+D:^^^^^^^^#x.x.x.x#^^^^^^^#x.x.x.x%
+D:^^^^^^^^#.x.x.x.#^^^^^^^#.x.x.x.%
+D:^^^^^^^^#x.x.x.x#^^^^^^^#x.x.x.x%
+D:^^^^^^^^#%%%%%%%#^^^^^^^#%%%%%%%#
+
+name: Angband-House of Many Doors
+weight: 1
+size: 11-7
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%#%#%#%#%#
+D:%.=.=.=.=.%
+D:#=#=#=#=#=#
+D:%.=.=*=.=.%
+D:#=#=#=#=#=#
+D:%.=.=.=.=.%
+D:#%#%#%#%#%#
+
+name: Angband-Spiral Left Down
+weight: 1
+size: 14-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%############
+D:%.#........[.#
+D:%.#[########.#
+D:%.#.#....[.#.#
+D:%.#.#[####.#.#
+D:%.#.#...*#.#.#
+D:%.#.######[#.#
+D:%.#.[......#.#
+D:%.##########[#
+D:%.[..........#
+D:#%############
+
+name: Angband-Spiral Left Up
+weight: 1
+size: 14-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%############
+D:%.[..........#
+D:%.##########[#
+D:%.#.[......#.#
+D:%.#.######[#.#
+D:%.#.#...*#.#.#
+D:%.#.#[####.#.#
+D:%.#.#....[.#.#
+D:%.#[########.#
+D:%.#........[.#
+D:#%############
+
+name: Angband-Spiral Right Down
+weight: 1
+size: 14-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:############%#
+D:#.[........#.%
+D:#.########[#.%
+D:#.#.[....#.#.%
+D:#.#.####[#.#.%
+D:#.#.#*...#.#.%
+D:#.#[######.#.%
+D:#.#......[.#.%
+D:#[##########.%
+D:#..........[.%
+D:############%#
+
+name: Angband-Spiral Right Up
+weight: 1
+size: 14-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:############%#
+D:#..........[.%
+D:#[##########.%
+D:#.#......[.#.%
+D:#.#[######.#.%
+D:#.#.#*...#.#.%
+D:#.#.####[#.#.%
+D:#.#.[....#.#.%
+D:#.########[#.%
+D:#.[........#.%
+D:############%#
+
+name: Angband-Pyramid Chambers
+weight: 1
+size: 15-8
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:^^^^^#%#%#^^^^^
+D:^^^^##.2.##^^^^
+D:^^^##..1..##^^^
+D:^^##..###..##^^
+D:^##(#)#*#)#(##^
+D:##..1.#=#.1..##
+D:%...2.....2...%
+D:#%%%#%%#%%#%%%#
+
+name: Angband-Pyramid Chambers Inverted
+weight: 1
+size: 15-8
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%#%%#%%#%%%#
+D:%...2.....2...%
+D:##..1.#=#.1..##
+D:^##(#)#*#)#(##^
+D:^^##..###..##^^
+D:^^^##..1..##^^^
+D:^^^^##.2.##^^^^
+D:^^^^^#%#%#^^^^^
+
+name: Angband-Oval Stack
+weight: 1
+size: 21-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:^^^^^^#%%%#%%%#^^^^^^
+D:^^#####...x...#####^^
+D:###.......x.......###
+D:%.........x.........%
+D:###...x[xxxxx[x...###
+D:^^#####@..[..@#####^^
+D:###...x[xxxxx[x...###
+D:%.........x.........%
+D:###.......x.......###
+D:^^#####...x...#####^^
+D:^^^^^^#%%%#%%%#^^^^^^
+
+name: Angband-Linked Circles Left
+weight: 1
+size: 19-11
+doors: 3
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:^^^##%%%##^^^^^^^^^
+D:^#%#.....#%#^^^^^^^
+D:##.........##^^^^^^
+D:%........#3##%%#^^^
+D:%......#1#..2..#%#^
+D:##....##.[.##....##
+D:^#%#..2..#1#......%
+D:^^^##%##3#........%
+D:^^^^^^##.........##
+D:^^^^^^^#%#.....#%#^
+D:^^^^^^^^^##%%%##^^^
+
+name: Angband-Linked Cirlces Right
+weight: 1
+size: 19-11
+doors: 3
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:^^^^^^^^^##%%%##^^^
+D:^^^^^^^#%#.....#%#^
+D:^^^^^^##.........##
+D:^^^##%##3#........%
+D:^#%#..2..#1#......%
+D:##....##.[.##....##
+D:%......#1#..2..#%#^
+D:%........#3##%%#^^^
+D:##.........##^^^^^^
+D:^#%#.....#%#^^^^^^^
+D:^^^##%%%##^^^^^^^^^
+
+name: Angband-Zag Waves Down
+weight: 1
+size: 19-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:###%%%%%##%%%#%%%%#
+D:%.#.....#....#....%
+D:%..#...#....#x#...%
+D:%...#.#....#.x.#..%
+D:#....#....#..x..#.%
+D:##...x..@#...x...##
+D:%.#..x..#....#....#
+D:%..#.x.#....#.#...%
+D:%...#x#....#...#..%
+D:%....#....#.....#.%
+D:#%%%%#%%%##%%%%%#%#
+
+name: Angband-Zag Waves Up
+weight: 1
+size: 19-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%#%%%##%%%%%#%#
+D:%....#....#.....#.%
+D:%...#x#....#...#..%
+D:%..#.x.#....#.#...%
+D:%.#..x..#....#....#
+D:##...x...#...x...##
+D:#....#...@#..x..#.%
+D:%...#.#....#.x.#..%
+D:%..#...#....#x#...%
+D:%.#.....#....#....%
+D:###%%%%%##%%%#%%%%# 
+
+name: Angband-Diagonal Corridor Down
+weight: 1
+size: 11-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%^^^^^^^^
+D:%.#%^^^^^^^
+D:%#.#%^^^^^^
+D:^%#.#%^^^^^
+D:^^%#.#%^^^^
+D:^^^%#.#%^^^
+D:^^^^%#.#%^^
+D:^^^^^%#.#%^
+D:^^^^^^%#.#%
+D:^^^^^^^%#.%
+D:^^^^^^^^%%#
+
+name: Angband-Diagonal Corridor Up
+weight: 1
+size: 11-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:^^^^^^^^%%#
+D:^^^^^^^%#.%
+D:^^^^^^%#.#%
+D:^^^^^%#.#%^
+D:^^^^%#.#%^^
+D:^^^%#.#%^^^
+D:^^%#.#%^^^^
+D:^%#.#%^^^^^
+D:%#.#%^^^^^^
+D:%.#%^^^^^^^
+D:#%%^^^^^^^^
+
+name: Angband-Divisions
+weight: 1
+size: 19-11
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:########%#%########
+D:#.@......2........#
+D:#........1........#
+D:#....#########...@#
+D:%....)xxxxxxx)....%
+D:#2#1##xxxxxxx##1#2#
+D:%....)xxxxxxx)....%
+D:#....#########....#
+D:#@.......1........#
+D:#........2......@.#
+D:########%#%########
+
+name: Angband-Two Thick-Walled Rooms
+weight: 1
+size: 25-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%%%%%%%%%%%%%%%#
+D:%.......................%
+D:%.##########.##########.%
+D:%.##########]##########.%
+D:%.##......##.##......##.%
+D:%.##....@.=...=..@...##.%
+D:%.##......##.##......##.%
+D:%.##########]##########.%
+D:%.##########.##########.%
+D:%.......................%
+D:#%%%%%%%%%%%%%%%%%%%%%%%#
+
+name: Angband-Rectangle-Moated Oval
+weight: 1
+size: 25-11
+doors: 4
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%%%%%%%%%%%%%%%#
+D:%.......................%
+D:%.......####3####.......%
+D:%....####.......####....%
+D:%..###.....+]+.....###..%
+D:%..1......++@++......2..%
+D:%..###.....+]+.....###..%
+D:%....####.......####....%
+D:%.......####4####.......%
+D:%.......................%
+D:#%%%%%%%%%%%%%%%%%%%%%%%#
+
+name: Angband-Corner Pockets
+weight: 1
+size: 20-11
+doors: 0
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%%%%%%%%%%#
+D:%..................%
+D:%..#.##########.#..%
+D:%.#.#..........#.#.%
+D:%..#...xxxxxx...#..%
+D:%..#...[@..@[...#..%
+D:%..#...xxxxxx...#..%
+D:%.#.#..........#.#.%
+D:%..#.##########.#..%
+D:%..................%
+D:#%%%%%%%%%%%%%%%%%%#
+
+name: Angand-Checkers Squared Twice
+weight: 1
+size: 33-11
+doors: 2
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#########%%%%%%%#########%%%%%%%#
+D:#.#.#.#.2.......1.#.#.#.2.......%
+D:##.#@#.##.......##.#.#.##.......%
+D:#.#.#.#.1.......2.#.#.#.1.......%
+D:##.#.#.##.......##.#.#.##.......%
+D:##1###2###2###1###1###2###2###1##
+D:%.......##.#.#.##.......##.#.#.##
+D:%.......1.#.#.#.2.......1.#.#.#.#
+D:%.......##.#.#.##.......##.#@#.##
+D:%.......2.#.#.#.1.......2.#.#.#.#
+D:#%%%%%%%#########%%%%%%%#########
+
+name: Angband-Jellyfish
+weight: 1
+size: 33-11
+doors: 3
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%%%%%#####%%%%%%%%%%%%%#
+D:%.............1.#.2.............%
+D:%....#####....#...#....#####....%
+D:%...#.....#...##=##...#.....#...%
+D:%...#.#@#.#...#...#...#.#@#.#...%
+D:%..#.......#..3.#.3..#.......#..%
+D:%..#########..#...#..#########..%
+D:%...#.#.#.#...##=##...#.#.#.#...%
+D:%..#.#.#.#.#..#...#..#.#.#.#.#..%
+D:%.............2.#.1.............%
+D:#%%%%%%%%%%%%%#####%%%%%%%%%%%%%#
+
+name: Angband-Fort
+weight: 1
+size: 17-11
+doors: 4
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:######%%%%%######
+D:#....#.....#...@#
+D:#.xx.###=###.xx.#
+D:#....=.....=....#
+D:######.#1#.######
+D:%....=.4*2.=....%
+D:######.#3#.######
+D:#....=.....=....#
+D:#.xx.###=###.xx.#
+D:#@...#.....#....#
+D:######%%%%%######
+
+name: Angband-Secret Centre
+weight: 1
+size: 17-11
+doors: 4
+tval: 0
+theme: DUNGEON-CRYPT-STRONGHOLD
+D:#%%%%%%%%%%%%%%%#
+D:%...............%
+D:%..x[#=#=#=#[x..%
+D:%..[.#.#.#.#.[..%
+D:%..#####2#####..%
+D:%..=.=.1*3.=.=..%
+D:%..#####4#####..%
+D:%..[.#.#.#.#.[..%
+D:%..x[#=#=#=#[x..%
+D:%...............%
+D:#%%%%%%%%%%%%%%%#

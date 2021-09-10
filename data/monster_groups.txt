@@ -1,0 +1,54 @@
+# This file contains a series of templates that represent the groups of monsters that can spawn
+
+# NOTE: you can add "comment" lines anywhere in this file to explain further if needed.
+# To do this, the line must BEGIN with "# " (yes, with a space)
+
+# Templates MUST begin with a "name" line. By convention, templates are also divided up by
+# three blank lines, but this is not strictly necessary
+
+# Do NOT modify this file if you do not understand how any part of it works. This can and will
+# result in crashes or undefined behavior
+
+# ------------------------------------------------------------------------------------------ #
+# -                                 HOW TO MAKE A TEMPLATE                                 - #
+# ------------------------------------------------------------------------------------------ #
+# - name: this is the name of the group (this does not have to be unique)                  - #
+# -                                                                                        - #
+# - This line is followed by as many monster definitions as you would like. The format for - #
+# - a monster definition is as follows:                                                    - #
+# -                                                                                        - #
+# - m-name: this is the name of the monster                                                - #
+# - amount: the number of this monster to spawn                                            - #
+# -                                                                                        - #
+# ------------------------------------------------------------------------------------------ #
+# -                                                                                        - #
+# ------------------------------------------------------------------------------------------ #
+
+
+name: SMALL ORC PATROL
+
+m-name: Orc
+amount: 2-4
+
+m-name: Orc Warrior
+amount: 0-1
+
+
+
+name: LARGE ORC PATROL
+
+m-name: Orc
+amount: 3-6
+
+m-name: Orc Warrior
+amount: 1-3
+
+m-name: Orc Warlord
+amount: 0-1
+
+
+
+name: A SINGLE GOBLIN
+
+m-name: Goblin
+amount: 1-1
